@@ -22,6 +22,42 @@ namespace CIT349Website {
         protected global::System.Web.UI.WebControls.Button btnPost;
         
         /// <summary>
+        /// btnCheckProcess1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCheckProcess1;
+        
+        /// <summary>
+        /// lblText1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblText1;
+        
+        /// <summary>
+        /// btnCheckProcess2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCheckProcess2;
+        
+        /// <summary>
+        /// lblText2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblText2;
+        
+        /// <summary>
         /// GridView1 control.
         /// </summary>
         /// <remarks>
