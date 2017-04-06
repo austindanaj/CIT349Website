@@ -134,9 +134,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Downloads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\StyleSheet.css" />
+    <Content Include="Downloads.aspx" />
     <Content Include="UserInfo.aspx" />
     <Content Include="Register.aspx" />
     <Content Include="Login.aspx" />
@@ -206,6 +208,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Downloads.aspx.cs">
+      <DependentUpon>Downloads.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Downloads.aspx.designer.cs">
+      <DependentUpon>Downloads.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UserInfo.aspx.cs">
       <DependentUpon>UserInfo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
