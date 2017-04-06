@@ -8,10 +8,10 @@
        <asp:Button ID="btnPost" runat="server" OnClick="Post_clicked" CssClass="btn btn-primary btn-lg" Text="Write Blog" /> 
     </div>
 
-        <asp:Button ID="btnCheckProcess1" runat="server" OnClick="didCheckProcess1" Text="Check Process 1" />
+        <asp:Button ID="btnCheckProcess1" runat="server" OnClick="didCheckProcess1" Text="Check Server Status 1" />
     <asp:Label ID="lblText1" runat="server" Text=""></asp:Label>
 
-       <asp:Button ID="btnCheckProcess2" runat="server" OnClick="didCheckProcess2" Text="Check Process 2" />
+       <asp:Button ID="btnCheckProcess2" runat="server" OnClick="didCheckProcess2" Text="Check Server Status 2" />
     <asp:Label ID="lblText2" runat="server" Text=""></asp:Label>
     <div>
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" class="gridview" ShowHeader="false" GridLines="None">

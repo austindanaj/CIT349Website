@@ -24,9 +24,9 @@ namespace CIT349Website
         }
         public void sendCommand(string newcommand)
         {
-            var PasswordConnection = new PasswordAuthenticationMethod("djmadurs", "r4vedave!");
+            var PasswordConnection = new PasswordAuthenticationMethod("sumomuf", "Temp12345");
             string myData = null;
-            var connecitonInfo = new ConnectionInfo("141.210.25.85", "djmadurs", PasswordConnection);
+            var connecitonInfo = new ConnectionInfo("141.210.25.93", "sumomuf", PasswordConnection);
             using (SshClient ssh = new SshClient(connecitonInfo))
             {
                 ssh.Connect();
@@ -38,42 +38,52 @@ namespace CIT349Website
         }
 
 
-        protected void didCheckDownload(object sender, EventArgs e)
+        protected void didCheckDownload1(object sender, EventArgs e)
         {
             try
             {
-                if (File.Exists("~/Downloads/Minecraft_Forge.zip"))
-                {
-                    Response.ContentType = "File/zip";
-                    Response.AppendHeader("Content-Disposition", "attachment; filename=Minecraft_Forge.zip");
-                    Response.TransmitFile(Server.MapPath("~/Downloads/Minecraft_Forge.zip"));
-                    Response.End();
-                }
-                else
-                {
-                    var PasswordConnection = new PasswordAuthenticationMethod("djmadurs", "r4vedave!");
-                    string myData = null;
-                    var connecitonInfo = new ConnectionInfo("141.210.25.85", "djmadurs", PasswordConnection);
-                    sendCommand("tar -czvf Minecraft_Forge.tar.gz /home/djmadurs/whitelist.json");
-                    using (var sftp = new SftpClient(connecitonInfo))
-                    {
-                        string localFileName = Path.GetDirectoryName("~/Downloads");
-                        string remoteFile = "";
-                        sftp.Connect();
-                        Stream file1 = File.OpenWrite(localFileName);
-
-                        sftp.DownloadFile("/home/djmadurs/whitelist.json", file1);
-                        sftp.Disconnect();
-                    }
-
-
-
-                }
+                
+                Response.ContentType = "File/jar";
+                Response.AppendHeader("Content-Disposition", "attachment; filename=Minecraft_Forge.jar");
+                Response.TransmitFile(Server.MapPath("~/Minecraft/Minecraft_Forge.jar"));
+                Response.End();
+            
             }catch(Exception ex)
             {
                 Response.Write(ex.ToString());
             }
            
+        }
+        protected void didCheckDownload2(object sender, EventArgs e)
+        {
+            try
+            {
+                var PasswordConnection = new PasswordAuthenticationMethod("sumomuf", "Temp12345");
+                string myData = null;
+                var connecitonInfo = new ConnectionInfo("141.210.25.93", "sumomuf", PasswordConnection);
+                sendCommand("zip -r Minecraft_Mods.zip /home/mdrichar/minecraft/mods");
+              
+
+                using (var scp = new ScpClient(connecitonInfo))
+                {
+
+                    DirectoryInfo info = new DirectoryInfo(@"C:\inetpub\wwwroot\PackageTmp\Minecraft");
+
+                    scp.Connect();
+                    scp.Download("/home/sumomuf/Minecraft_Mods.zip", info);
+                }
+
+                Response.ContentType = "File/.zip";
+                Response.AppendHeader("Content-Disposition", "attachment; filename=Minecraft_Mods.zip");
+                Response.TransmitFile(Server.MapPath("~/Minecraft/Minecraft_Mods.zip"));
+                Response.End();
+
+                
+            }
+            catch (Exception ex)
+            {
+                Response.Write(ex.ToString());
+            }
         }
         private static void DownloadDirectory(SftpClient client, string source, string destination)
         {

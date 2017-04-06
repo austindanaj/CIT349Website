@@ -8,6 +8,7 @@
        <asp:Button ID="btnPost" runat="server" CssClass="btn btn-primary btn-lg" Text="Write Blog" /> 
     </div>
 
-        <asp:Button ID="btnDownload" runat="server" OnClick="didCheckDownload" Text="Check Process 1" />
+        <asp:Button ID="btnDownload1" runat="server" OnClick="didCheckDownload1" Text="Download Forge" />
+      <asp:Button ID="btnDownload2" runat="server" OnClick="didCheckDownload2" Text="Download Mods" />
    
 </asp:Content>
