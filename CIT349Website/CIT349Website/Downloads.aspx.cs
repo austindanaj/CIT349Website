@@ -50,7 +50,7 @@ namespace CIT349Website
             
             }catch(Exception ex)
             {
-                Response.Write(ex.ToString());
+               // Response.Write(ex.ToString());
             }
            
         }
@@ -58,19 +58,22 @@ namespace CIT349Website
         {
             try
             {
-                var PasswordConnection = new PasswordAuthenticationMethod("sumomuf", "Temp12345");
-                string myData = null;
-                var connecitonInfo = new ConnectionInfo("141.210.25.93", "sumomuf", PasswordConnection);
-                sendCommand("zip -r Minecraft_Mods.zip /home/mdrichar/minecraft/mods");
-              
-
-                using (var scp = new ScpClient(connecitonInfo))
+                if (!System.IO.File.Exists(@"C:\inetpub\wwwroot\PackageTmp\Minecraft\Minecraft_Mods.zip"))
                 {
+                    var PasswordConnection = new PasswordAuthenticationMethod("sumomuf", "Temp12345");
+                    string myData = null;
+                    var connecitonInfo = new ConnectionInfo("141.210.25.93", "sumomuf", PasswordConnection);
+                    sendCommand("zip -r Minecraft_Mods.zip /home/mdrichar/minecraft/mods");
 
-                    DirectoryInfo info = new DirectoryInfo(@"C:\inetpub\wwwroot\PackageTmp\Minecraft");
 
-                    scp.Connect();
-                    scp.Download("/home/sumomuf/Minecraft_Mods.zip", info);
+                    using (var scp = new ScpClient(connecitonInfo))
+                    {
+
+                        DirectoryInfo info = new DirectoryInfo(@"C:\inetpub\wwwroot\PackageTmp\Minecraft");
+
+                        scp.Connect();
+                        scp.Download("/home/sumomuf/Minecraft_Mods.zip", info);
+                    }
                 }
 
                 Response.ContentType = "File/.zip";
@@ -82,7 +85,7 @@ namespace CIT349Website
             }
             catch (Exception ex)
             {
-                Response.Write(ex.ToString());
+               // Response.Write(ex.ToString());
             }
         }
         private static void DownloadDirectory(SftpClient client, string source, string destination)

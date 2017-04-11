@@ -19,12 +19,21 @@ namespace CIT349Website
         protected void Page_Load(object sender, EventArgs e)
         {
             BindBlog();
+   
+            
         }
         protected void Post_clicked(object sender, EventArgs e)
         {
             
-            
-            Response.Redirect("~/write");
+            if(!string.IsNullOrEmpty((string)Session["User"]))
+            {
+                Response.Redirect("~/write");
+            }else
+            {
+                displayErrorMessage("You must be logged in first!");
+            }
+           
+    
         }
         void BindBlog()
         {
@@ -45,7 +54,7 @@ namespace CIT349Website
             }
             catch (Exception k)
             {
-                Response.Write(k.Message);
+              // Response.Write(k.Message);
                 //throw;
             }
             finally
@@ -97,6 +106,14 @@ namespace CIT349Website
             {
                 lblText2.Text = "Sorry, server is offline!";
             }
+        }
+        public void displayErrorMessage(string message)
+        {
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append("alert('");
+            sb.Append(message);
+            sb.Append("');");
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString(), true);
         }
     }
 }

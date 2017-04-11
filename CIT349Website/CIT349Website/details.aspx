@@ -55,7 +55,7 @@
         </asp:GridView>
         <asp:Label ID="LabelNoComment" runat="server" Text="No comments yet." Visible="false"></asp:Label>
     </div>
-    <div id="comment_form">
+    <div id="comment_form" runat="server" >
         <h3>Post a comment</h3>
       
         <asp:TextBox ID="txbxcommentauthor" placeholder="Name" CssClass="txt-descrip" runat="server" MaxLength="30"></asp:TextBox>

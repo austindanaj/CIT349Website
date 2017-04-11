@@ -22,6 +22,12 @@ namespace CIT349Website
                 DetailsView1.DefaultMode = DetailsViewMode.ReadOnly;
                 detail();
                 bindComment();
+                txbxcommentauthor.Text = (string)Session["User"];
+                txbxcommentauthor.Enabled = false;
+            }
+            if (string.IsNullOrEmpty((string)Session["User"]))
+            {
+                comment_form.Visible = false;
             }
         }
 

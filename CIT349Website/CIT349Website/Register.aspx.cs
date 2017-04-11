@@ -25,43 +25,61 @@ namespace CIT349Website
             try
             {
 
-                if (!string.IsNullOrEmpty(txtUser.Text) || !string.IsNullOrEmpty(txtPass.Text) || !string.IsNullOrEmpty(txtConfirm.Text)
-                    || !string.IsNullOrEmpty(txtFName.Text) || !string.IsNullOrEmpty(txtLName.Text) )
+                if (!string.IsNullOrEmpty(txtUser.Text) && !string.IsNullOrEmpty(txtPass.Text) && !string.IsNullOrEmpty(txtConfirm.Text)
+                    && !string.IsNullOrEmpty(txtFName.Text) && !string.IsNullOrEmpty(txtLName.Text) )
                 {
-                    if (con.State == ConnectionState.Closed)
+                    if (txtPass.Text.Equals(txtConfirm.Text))
                     {
-                        con.Open();
+
+
+                        if (con.State == ConnectionState.Closed)
+                        {
+                            con.Open();
+                        }
+
+
+                        SqlCommand sqlAccount = new SqlCommand();
+                        sqlAccount.CommandText = "INSERT INTO Account (ACCT_USERNAME, ACCT_PASSWORD, ACCT_FIRSTNAME, ACCT_LASTNAME) VALUES (@value1, @value2, @value3, @value4);";
+                        sqlAccount.Parameters.AddWithValue("@value1", txtUser.Text);
+                        sqlAccount.Parameters.AddWithValue("@value2", txtPass.Text);
+                        sqlAccount.Parameters.AddWithValue("@value3", txtFName.Text);
+                        sqlAccount.Parameters.AddWithValue("@value4", txtLName.Text);
+                        sqlAccount.Connection = con;
+                        sqlAccount.ExecuteNonQuery();
+
+
+
+
+                        Session["User"] = txtFName.Text + " " + txtLName.Text;
+                        Session["UserStatus"] = "Sign Out";
+                        Response.Redirect("~/Default");
+                        sqlAccount.Dispose();
                     }
-
-
-                    SqlCommand sqlAccount = new SqlCommand();
-                    sqlAccount.CommandText = "INSERT INTO Account (ACCT_USERNAME, ACCT_PASSWORD, ACCT_FIRSTNAME, ACCT_LASTNAME) VALUES (@value1, @value2, @value3, @value4);";
-                    sqlAccount.Parameters.AddWithValue("@value1", txtUser.Text);
-                    sqlAccount.Parameters.AddWithValue("@value2", txtPass.Text);
-                    sqlAccount.Parameters.AddWithValue("@value3", txtFName.Text);
-                    sqlAccount.Parameters.AddWithValue("@value4", txtLName.Text);
-                    sqlAccount.Connection = con;
-                    sqlAccount.ExecuteNonQuery();
-                     
-                
-                  
-                 
-                    Session["User"] = txtFName.Text + " " + txtLName.Text;
-                    Session["UserStatus"] = "Sign Out";
-                    Response.Redirect("~/Default");
-                    sqlAccount.Dispose();
-                    }else{
-
+                    else
+                    {
+                        displayErrorMessage("Passwords dont match!");
                     }
+                }
+                else {
+                    displayErrorMessage("Please fill in all fields!");
+                }
                        
 
             }
             catch (Exception k)
             {
-                Response.Write(k.Message);
+               // Response.Write(k.Message);
                 //throw;
             }
             finally { con.Close(); }
+        }
+        public void displayErrorMessage(string message)
+        {
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append("alert('");
+            sb.Append(message);
+            sb.Append("');");
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString(), true);
         }
     }
 }

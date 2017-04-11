@@ -16,12 +16,12 @@ namespace CIT349Website
         SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["ourdb"].ConnectionString);
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+            if (((string)Session["UserStatus"]).Equals("Sign In"))
+            {
+                Response.Redirect("~/Login");
+            }
         }
-        protected void SignIn_Clicked(object sender, EventArgs e)
-        {
-
-        }
+      
     }
 
 }

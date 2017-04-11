@@ -29,6 +29,7 @@ namespace CIT349Website
                     txtUser.Visible = false;
                     lblSignIn.Visible = false;
                     btnSignIn.Text = "Sign Out";
+                    lnkButton.Visible = false;
                 }
             }
         }
@@ -40,7 +41,7 @@ namespace CIT349Website
                 // string error = "";
                 try
                 {
-                    if (!string.IsNullOrEmpty(txtUser.Text) || (!string.IsNullOrEmpty(txtPass.Text)))
+                    if (!string.IsNullOrEmpty(txtUser.Text) && (!string.IsNullOrEmpty(txtPass.Text)))
                     {
                         if (con.State == ConnectionState.Closed)
                         {
@@ -65,11 +66,15 @@ namespace CIT349Website
                             Response.Redirect("~/Default");
                             break;
                         }
+                        if(count == 0)
+                        {
+                            displayErrorMessage("Incorrect Username/Password");
+                        }
                         sqlAccount.Dispose();
                     }
                     else
                     {
-
+                        displayErrorMessage("Please fill in all fields!");
                     }
 
 
@@ -79,7 +84,7 @@ namespace CIT349Website
                 }
                 catch (Exception k)
                 {
-                    Response.Write(k.Message);
+                  //al  Response.Write(k.Message);
                     //throw;
                 }
                 finally { con.Close(); }
@@ -94,6 +99,13 @@ namespace CIT349Website
         protected void NeedAccount_Clicked(object sender, EventArgs e)
         {
             Response.Redirect("~/Register");
+        }
+        public void displayErrorMessage(string message) {
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append("alert('");
+            sb.Append(message);
+            sb.Append("');");
+            ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", sb.ToString(), true);
         }
     }
 

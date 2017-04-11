@@ -10,10 +10,10 @@
                 <br />
                 <br />
                 <asp:TextBox ID="txtFName" runat="server" placeholder="First Name"></asp:TextBox>
-                <asp:TextBox ID="txtLName" runat="server" placeholder="Last Name"></asp:TextBox>               
-                <asp:TextBox ID="txtUser" runat="server" placeholder="username"></asp:TextBox>
-                <asp:TextBox ID="txtPass" runat="server" placeholder="password" TextMode="Password"></asp:TextBox>
-                <asp:TextBox ID="txtConfirm" runat="server" placeholder="confirm password" TextMode="Password"></asp:TextBox> 
+                <asp:TextBox ID="txtLName" runat="server" placeholder="Last Name"></asp:TextBox>                              
+                <asp:TextBox ID="txtUser" runat="server" placeholder="Minecraft Username"></asp:TextBox>
+                <asp:TextBox ID="txtPass" runat="server" placeholder="New Password" TextMode="Password"></asp:TextBox>
+                <asp:TextBox ID="txtConfirm" runat="server" placeholder="Confirm password" TextMode="Password"></asp:TextBox> 
                 <asp:Button ID="btnRegister" runat="server" OnClick="Register_Clicked" Text="Register" CssClass="btn-login"/>
                 <br />
                
